@@ -28,5 +28,23 @@ def load_data(year):
 	raw = raw.fillna(0)
 	player_stats = raw.drop(['Rk'], axis=1)
 	return player_stats
+player_stats = load_data(selected_year)
 
+# Sidebar - Team selection
+sorted_unique_team = sorted(player_stats.Tm.unique())
+selected_team = st.sidebar.multiselect('Team', sorted_unique_team, sorted_unique_team)
+
+# Sidebar - Position selection
+unique_pos = ['C','PF','SF','PG','SG']
+selected_pos = st.sidebar.multiselect('Position', unique_pos, unique_pos)
+
+# Filtering data
+df_selected_team = player_stats[(player_stats.Tm.isin(selected_team)) & (player_stats.Pos.isin(selected_pos))]
+#### Error appears when .astype(str) below is not used. See link below for more details.
+#### https://stackoverflow.com/questions/69578431/how-to-fix-streamlitapiexception-expected-bytes-got-a-int-object-conver
+df_selected_team = df_selected_team.astype(str)
+
+st.header('Display Player Stats of Selected Team(s)')
+st.write('Data Dimension: ' + str(df_selected_team.shape[0]) + ' rows and ' + str(df_selected_team.shape[1]) + ' columns.')
+st.dataframe(df_selected_team)
 
