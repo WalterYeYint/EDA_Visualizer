@@ -1,0 +1,22 @@
+{
+	"basketball":
+	{
+		"sport_site_name": "Basketball-reference.com",
+		"sport_url": "https://www.basketball-reference.com/leagues/NBA_",
+		"sport_root_url": "https://www.basketball-reference.com/"
+	},
+
+	"football":
+	{
+		"sport_site_name": "pro-football-reference.com",
+		"sport_url": "https://www.pro-football-reference.com/years/",
+		"sport_root_url": "https://www.pro-football-reference.com/"
+	},
+
+	"baseball":
+	{
+		"sport_site_name": "baseball.com",
+		"sport_url": "https://www.pro-football-reference.com/years/",
+		"sport_root_url": "https://www.geeksforgeeks.org/convert-json-to-dictionary-in-python/"
+	}
+}

@@ -6,9 +6,9 @@ import base64
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
-import cv2
 from PIL import Image
 from io import BytesIO
+import json
 
 @st.cache		# python decorator
 def load_data(year):
@@ -45,17 +45,14 @@ def heatmap_download(img, filename, text):
 st.sidebar.header("User Input Features")
 
 # Sidebar - Sport selection
-sport_list = ['basketball', 'football']
+with open('sport_url_data.json') as json_file:
+	json_data = json.load(json_file)
+sport_list = list(json_data.keys())
 selected_sport = st.sidebar.selectbox('Sport', sport_list)
 
-if selected_sport == 'basketball':
-	sport_site_name = "Basketball-reference.com"
-	sport_url = "https://www.basketball-reference.com/leagues/NBA_"
-	sport_root_url = "https://www.basketball-reference.com/"
-else:
-	sport_site_name = "pro-football-reference.com"
-	sport_url = "https://www.pro-football-reference.com/years/"
-	sport_root_url = "https://www.pro-football-reference.com/"
+sport_site_name = json_data[selected_sport]['sport_site_name']
+sport_url = json_data[selected_sport]['sport_url']
+sport_root_url = json_data[selected_sport]['sport_root_url']
 
 # Sidebar - Year selection
 selected_year = st.sidebar.selectbox('Year', list(reversed(range(1950,2020))))
