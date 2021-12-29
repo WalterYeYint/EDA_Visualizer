@@ -42,16 +42,22 @@ def heatmap_download(img, filename, text):
 	href =  f'<a href="data:file/txt;base64,{img_str}" download="{filename}">{text}</a>'
 	return href
 
-
-st.title("NBA Player Stats Explorer")
-
-st.markdown("""
-Simple webscraping of NBA player stats data
-* **Python libraries:** base64, pandas, streamlit
-* **Data source:** [Basketball-reference.com](https://www.basketball-reference.com/).
-""")
-
 st.sidebar.header("User Input Features")
+
+# Sidebar - Sport selection
+sport_list = ['basketball', 'football']
+selected_sport = st.sidebar.selectbox('Sport', sport_list)
+
+if selected_sport == 'basketball':
+	sport_site_name = "Basketball-reference.com"
+	sport_url = "https://www.basketball-reference.com/leagues/NBA_"
+	sport_root_url = "https://www.basketball-reference.com/"
+else:
+	sport_site_name = "pro-football-reference.com"
+	sport_url = "https://www.pro-football-reference.com/years/"
+	sport_root_url = "https://www.pro-football-reference.com/"
+
+# Sidebar - Year selection
 selected_year = st.sidebar.selectbox('Year', list(reversed(range(1950,2020))))
 
 # Web scraping of NBA player stats
@@ -70,6 +76,15 @@ df_selected_team = player_stats[(player_stats.Tm.isin(selected_team)) & (player_
 #### Error appears when .astype(str) below is not used. See link below for more details.
 #### https://stackoverflow.com/questions/69578431/how-to-fix-streamlitapiexception-expected-bytes-got-a-int-object-conver
 df_selected_team = df_selected_team.astype(str)
+
+
+st.title("NBA Player Stats Explorer")
+
+st.markdown(f"""
+Simple webscraping of NBA player stats data
+* **Python libraries:** base64, pandas, streamlit
+* **Data source:** [{sport_site_name}]({sport_root_url}).
+""")
 
 st.header('Display Player Stats of Selected Team(s)')
 st.write('Data Dimension: ' + str(df_selected_team.shape[0]) + ' rows and ' + str(df_selected_team.shape[1]) + ' columns.')
