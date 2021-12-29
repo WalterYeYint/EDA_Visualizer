@@ -5,6 +5,8 @@ x = "football"
 with open('sport_url_data.json') as json_file:
 	data = json.load(json_file)
 
+	unique_pos = data[x]['sport_root_url']
+	print(unique_pos)
 	print(list(data.keys()))
 	print(data[x]["url"])
 	print("Type:", type(data))

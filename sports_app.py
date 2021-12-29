@@ -11,9 +11,9 @@ from io import BytesIO
 import json
 
 @st.cache		# python decorator
-def load_data(year):
-	url = "https://www.basketball-reference.com/leagues/NBA_" + str(year) + "_per_game.html"
-	html = pd.read_html(url, header=0)
+def load_data(year, sport_url_LHS, sport_url_RHS):
+	url = sport_url_LHS + str(year) + sport_url_RHS
+	html = pd.read_html(url, header=0 if selected_sport=="Basketball" else 1)
 	df = html[0]
 	raw = df.drop(df[df.Age == 'Age'].index)
 	raw = raw.fillna(0)
@@ -42,30 +42,35 @@ def heatmap_download(img, filename, text):
 	href =  f'<a href="data:file/txt;base64,{img_str}" download="{filename}">{text}</a>'
 	return href
 
+
+
 st.sidebar.header("User Input Features")
 
-# Sidebar - Sport selection
+# Access sport_url_data.json file
 with open('sport_url_data.json') as json_file:
 	json_data = json.load(json_file)
 sport_list = list(json_data.keys())
+
+# Sidebar - Sport selection
 selected_sport = st.sidebar.selectbox('Sport', sport_list)
 
 sport_site_name = json_data[selected_sport]['sport_site_name']
-sport_url = json_data[selected_sport]['sport_url']
+sport_url_LHS = json_data[selected_sport]['sport_url_LHS']
+sport_url_RHS = json_data[selected_sport]['sport_url_RHS']
 sport_root_url = json_data[selected_sport]['sport_root_url']
+unique_pos = json_data[selected_sport]['unique_pos']
 
 # Sidebar - Year selection
-selected_year = st.sidebar.selectbox('Year', list(reversed(range(1950,2020))))
+selected_year = st.sidebar.selectbox('Year', list(reversed(range(1990,2020))))
 
 # Web scraping of NBA player stats
-player_stats = load_data(selected_year)
+player_stats = load_data(selected_year, sport_url_LHS, sport_url_RHS)
 
 # Sidebar - Team selection
 sorted_unique_team = sorted(player_stats.Tm.unique())
 selected_team = st.sidebar.multiselect('Team', sorted_unique_team, sorted_unique_team)
 
 # Sidebar - Position selection
-unique_pos = ['C','PF','SF','PG','SG']
 selected_pos = st.sidebar.multiselect('Position', unique_pos, unique_pos)
 
 # Filtering data
