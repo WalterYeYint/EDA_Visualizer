@@ -59,6 +59,7 @@ sport_url_LHS = json_data[selected_sport]['sport_url_LHS']
 sport_url_RHS = json_data[selected_sport]['sport_url_RHS']
 sport_root_url = json_data[selected_sport]['sport_root_url']
 unique_pos = json_data[selected_sport]['unique_pos']
+league_name = json_data[selected_sport]['league_name']
 
 # Sidebar - Year selection
 selected_year = st.sidebar.selectbox('Year', list(reversed(range(1990,2020))))
@@ -80,10 +81,10 @@ df_selected_team = player_stats[(player_stats.Tm.isin(selected_team)) & (player_
 df_selected_team = df_selected_team.astype(str)
 
 
-st.title("NBA Player Stats Explorer")
+st.title(f"{league_name} Player Stats Explorer")
 
 st.markdown(f"""
-Simple webscraping of NBA player stats data
+Simple webscraping of {league_name} player stats data
 * **Python libraries:** base64, pandas, streamlit
 * **Data source:** [{sport_site_name}]({sport_root_url}).
 """)

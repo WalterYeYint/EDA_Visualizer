@@ -5,7 +5,8 @@
 		"sport_url_LHS": "https://www.basketball-reference.com/leagues/NBA_",
 		"sport_url_RHS": "_per_game.html",
 		"sport_root_url": "https://www.basketball-reference.com/",
-		"unique_pos": ["C", "PF", "SF", "PG", "SG"]
+		"unique_pos": ["C", "PF", "SF", "PG", "SG"],
+		"league_name": "NBA"
 	},
 
 	"American Football":
@@ -14,7 +15,8 @@
 		"sport_url_LHS": "https://www.pro-football-reference.com/years/",
 		"sport_url_RHS": "/rushing.htm",
 		"sport_root_url": "https://www.pro-football-reference.com/",
-		"unique_pos": ["RB", "QB", "WR", "FB", "TE"]
+		"unique_pos": ["RB", "QB", "WR", "FB", "TE"],
+		"league_name": "NFL"
 	},
 
 	"Baseball":
@@ -22,6 +24,7 @@
 		"sport_site_name": "baseball.com",
 		"sport_url": "https://www.pro-football-reference.com/years/",
 		"sport_root_url": "https://www.geeksforgeeks.org/convert-json-to-dictionary-in-python/",
-		"unique_pos": ["RB", "QB", "WR", "FB", "TE"]
+		"unique_pos": ["RB", "QB", "WR", "FB", "TE"],
+		"league_name": "MLB"
 	}
 }
