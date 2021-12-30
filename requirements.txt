@@ -1,5 +1,5 @@
 matplotlib
-seaborn
-numpy
-io
-json
+# seaborn
+# numpy
+# io
+# json
