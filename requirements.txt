@@ -1,5 +1,6 @@
 matplotlib
 seaborn
+lxml
 # numpy
 # io
 # json
