@@ -120,4 +120,3 @@ if st.button('Intercorrelation Heatmap'):
 	st.markdown(heatmap_download(img, heatmap_name,'Download '+heatmap_name), unsafe_allow_html=True)
 
 
-
